@@ -1,0 +1,5 @@
+name: redisconnector
+version: '0.1.0'
+main: ch.amarenyo.redisconnector.Redisconnector
+api-version: '1.21'
+load: STARTUP
