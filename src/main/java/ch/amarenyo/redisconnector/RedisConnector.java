@@ -10,38 +10,42 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public final class RedisConnector extends JavaPlugin {
-
+    //Starting connection with redis server
     RedisClient redis = RedisClient.builder().hostAndPort("localhost", 6379).build();
 
     @Override
     public void onEnable() {
 
+        //test connection, will output PONG on server start if it was successful
         String ping = redis.ping();
         getLogger().info(ping);
 
+        //Set key color to red on the server
+        redis.sadd("color", "Red");
 
-        redis.sadd("information_getter", "HELLO WORLD");
-
+        //start an executor to run sub in background
         ExecutorService executor;
         executor = Executors.newSingleThreadExecutor();
 
+        //run the executor
         executor.submit(() -> {
             try (Jedis jedis = new Jedis()) {
 
                 jedis.subscribe(new JedisPubSub() {
+
                 @Override
                 public void onMessage(String channel, String message) {
-
-
+                    //function that happen on the arrival of a message
 
                 }
-            }, "channel");
+            }, "channel"); //specify on which channel should get listened
             }
         });
     }
 
     @Override
     public void onDisable() {
-        redis.close();
+        redis.close();//close connection on shutdown
+        getLogger().info("Shutdown redis connection");
     }
 }
