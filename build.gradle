@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.10-R0.1-SNAPSHOT")
+    compileOnly('io.lettuce:lettuce-core:6.7.1.RELEASE')
 }
 
 tasks {
