@@ -4,8 +4,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 import redis.clients.jedis.RedisClient;
-
-import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -38,7 +36,7 @@ public final class RedisConnector extends JavaPlugin {
                     //function that happen on the arrival of a message
 
                 }
-            }, "channel"); //specify on which channel should get listened
+            }, "channel", "channel2"); //specify on which channels should get listened
             }
         });
     }
